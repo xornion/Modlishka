@@ -107,6 +107,7 @@ func (p *ReverseProxy) rewriteRequest(r *http.Request) (err error) {
 	defer log.FunctionTracking(time.Now(), "rewriteRequest")
 
 	request := HTTPRequest{r}
+	request.Header["X-Forwarded-For"] = nil // New
 	request.PatchHeaders(p)
 	request.PatchQueryString()
 
